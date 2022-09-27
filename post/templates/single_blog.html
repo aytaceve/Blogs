@@ -11,15 +11,7 @@
         <a href="{% url 'delete' i.id %}">Delete post</a><br>
     {% endfor %}
 
-    <form action="{% url 'blogpost_like' object.id %}" method="POST">
-        {% csrf_token %}
 
-        {% if post_is_liked %}
-            <button type="submit" name="blogpost_id" value="{{object.id}}" class="btn btn-info">Unlike</button>
-        {% else %}
-            <button type="submit" name="blogpost_id" value="{{object.id}}" class="btn btn-info">Like</button>
-        {% endif %}
-    </form>
 
     <a href="/">Back to home page</a>
 
