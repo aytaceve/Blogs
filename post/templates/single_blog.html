@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for i in post %}
+        <h1>{{ i.title }}</h1>
+        <p>{{ i.content }}</p>
+        <h6>{{ i.created_at }}</h6>
+        <h5>{{ i.likes }}</h5>
+        <a href="{% url 'update' i.id %}">Update post</a><br>
+        <a href="{% url 'delete' i.id %}">Delete post</a><br>
+    {% endfor %}
+
+    <form action="{% url 'blogpost_like' object.id %}" method="POST">
+        {% csrf_token %}
+
+        {% if post_is_liked %}
+            <button type="submit" name="blogpost_id" value="{{object.id}}" class="btn btn-info">Unlike</button>
+        {% else %}
+            <button type="submit" name="blogpost_id" value="{{object.id}}" class="btn btn-info">Like</button>
+        {% endif %}
+    </form>
+
+    <a href="/">Back to home page</a>
+
+{% endblock %}
