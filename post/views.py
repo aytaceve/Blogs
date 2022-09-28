@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import *
 from .forms import BlogForm
@@ -46,19 +48,29 @@ def delete(request, id):
 
 
 def single_blog_view(request, id):
-    post = Blog.objects.filter(id=id)
+    # post = Blog.objects.filter(id=id).first()
+    post = get_object_or_404(Blog, id=id)
+    total_likes = post.total_likes()
+    print('postssss', post)
+    print('likesssss ---- ', request.user.id)
+    liked = False
+    if post.likes.filter(id=request.user.id).exists():
+        liked = True
     context = {
         'post': post
     }
+    context['total_likes'] = total_likes
+    context['liked'] = liked
     return render(request, 'single_blog.html', context=context)
 
 
-def blog_post_like(request, id):
-    post = get_object_or_404(Blog, id=id)
+def like_view(request, pk):
+    post = get_object_or_404(Blog, id=request.POST.get('post_id'))
+    liked = False
     if post.likes.filter(id=request.user.id).exists():
-        post.likes.remove()
+        post.likes.remove(request.user)
+        liked = False
     else:
         post.likes.add(request.user)
-
-    return redirect('/')
-
+        liked = True
+    return HttpResponseRedirect(reverse('single_blog', args=[str(pk)]))

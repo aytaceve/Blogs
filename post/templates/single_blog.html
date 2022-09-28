@@ -2,17 +2,26 @@
 
 {% block content %}
 
-    {% for i in post %}
-        <h1>{{ i.title }}</h1>
-        <p>{{ i.content }}</p>
-        <h6>{{ i.created_at }}</h6>
-        <h5>{{ i.likes }}</h5>
-        <a href="{% url 'update' i.id %}">Update post</a><br>
-        <a href="{% url 'delete' i.id %}">Delete post</a><br>
-    {% endfor %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<h6>{{ post.created_at }}</h6>
+<a href="{% url 'update' post.id %}">Update post</a><br>
+<a href="{% url 'delete' post.id %}">Delete post</a><br>
 
+<a href="/">Back to home page</a>
+<p>{{ total_likes }} likes</p>
+<br/><br/>
+<hr>
+<br/>
+<!--<i class="fa fa-thumbs-up" style="font-size:30px;color:blue;"></i>-->
+<form action="{% url 'like_post' post.pk %}" method="post">
+    {% csrf_token %}
+    {% if liked %}
+        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm">Unlike</button>
+    {% else %}
+        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm">Like</button>
+    {% endif %}
+</form>
 
-
-    <a href="/">Back to home page</a>
 
 {% endblock %}
