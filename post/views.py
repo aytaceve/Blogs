@@ -51,8 +51,6 @@ def single_blog_view(request, id):
     # post = Blog.objects.filter(id=id).first()
     post = get_object_or_404(Blog, id=id)
     total_likes = post.total_likes()
-    print('postssss', post)
-    print('likesssss ---- ', request.user.id)
     liked = False
     if post.likes.filter(id=request.user.id).exists():
         liked = True
@@ -69,8 +67,19 @@ def like_view(request, pk):
     liked = False
     if post.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user)
+        print('REQUQUWUSUSU USERER-------', request.user)
         liked = False
     else:
         post.likes.add(request.user)
         liked = True
+    return HttpResponseRedirect(reverse('single_blog', args=[str(pk)]))
+
+
+def delete_likes(request, pk):
+    post = get_object_or_404(Blog, id=request.POST.get('post_id'))
+    user_liked = post.likes.values('id')
+    for user in user_liked:
+        post.likes.remove(user['id'])
+    print(user_liked)
+
     return HttpResponseRedirect(reverse('single_blog', args=[str(pk)]))

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 # Create your models here.
+
 class Blog(models.Model):
     user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
