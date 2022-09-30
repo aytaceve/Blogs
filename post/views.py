@@ -49,8 +49,9 @@ def login_view(request):
 
 
 def logout_view(request):
-    context = {}
-    return render(request, 'logout.html', context=context)
+    logout(request)
+    messages.info(request, 'You have successfully logged out.')
+    return redirect('login')
 
 @login_required
 def home_view(request):
