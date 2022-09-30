@@ -2,6 +2,15 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+<li>
+    <a href="/logout">Logout</a>
+</li>
+<li>
+    <a href="/">Welcome {{ user.username }}</a>
+</li>
+{% else %}
+
 {% for post in posts %}
 <a href="blogs/{{ post.id }}"><h1>{{ post.title }}</h1></a>
 <p>{{ post.content }}</p>

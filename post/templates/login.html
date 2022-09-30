@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Login form</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Daxil ol">
+</form>
+<p>If you don't have an account, please <a href="/register">Register</a></p>
+
+
+{% endblock %}
