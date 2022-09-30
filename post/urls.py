@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 from .views import home_view, create_view, single_blog_view, update_view, delete, like_view, delete_likes
 
 urlpatterns = [

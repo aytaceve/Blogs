@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from tasks.tasks.main import reset_likes
 from .models import *
 from .forms import BlogForm
 
@@ -80,6 +81,5 @@ def delete_likes(request, pk):
     user_liked = post.likes.values('id')
     for user in user_liked:
         post.likes.remove(user['id'])
-    print(user_liked)
 
     return HttpResponseRedirect(reverse('single_blog', args=[str(pk)]))
