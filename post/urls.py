@@ -9,5 +9,5 @@ urlpatterns = [
     path('update/<int:id>', update_view, name='update'),
     path('delete/<int:id>', delete, name="delete"),
     path('like/<int:pk>', like_view, name='like_post'),
-    path('likedelete/<int:pk>', delete_likes, name='delete_likes')
+    path('likedelete/', delete_likes, name='delete_likes')
 ]

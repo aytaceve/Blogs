@@ -8,12 +8,13 @@ app = Celery('blog')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.conf.beat_schedule = {
-    'delete-likes': {
+    'delete-likes-1-minutes': {
         'task': 'tasks.tasks.main.reset_likes',
-        'schedule': crontab(minute=0, hour=0),
-        # 'schedule': crontab(minute=0, hour=0)
+        'schedule': crontab(),
     }
 }
 
 
+# celery -A tasks beat -l debug --scheduler django_celery_beat.schedulers:DatabaseScheduler
+# celery -A tasks worker -l info
 app.autodiscover_tasks()

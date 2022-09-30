@@ -6,10 +6,15 @@
 <a href="blogs/{{ post.id }}"><h1>{{ post.title }}</h1></a>
 <p>{{ post.content }}</p>
 <h6>{{ post.created_at }}</h6>
-<h5>{{ post.likes }}</h5>
 {% endfor %}
 
 <a href="{% url 'create' %}">Create post</a>
 
+
+<form action="{% url 'delete_likes' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm">Delete all likes</button>
+
+</form>
 
 {% endblock %}

@@ -76,10 +76,20 @@ def like_view(request, pk):
     return HttpResponseRedirect(reverse('single_blog', args=[str(pk)]))
 
 
-def delete_likes(request, pk):
-    post = get_object_or_404(Blog, id=request.POST.get('post_id'))
-    user_liked = post.likes.values('id')
-    for user in user_liked:
-        post.likes.remove(user['id'])
+def delete_likes(request):
+    ids = []
+    blogs = Blog.objects.values()
+    print('blogs111111', blogs)
+    for i in range(blogs.count()):
+        ids.append(blogs[i]['id'])
 
-    return HttpResponseRedirect(reverse('single_blog', args=[str(pk)]))
+    print('idss22222222', ids)
+
+    for id in ids:
+        post = get_object_or_404(Blog, id=id)
+        print('post333333333', type(post))
+        user_liked = post.likes.values('id')
+        for user in user_liked:
+            post.likes.remove(user['id'])
+
+    return redirect('home')

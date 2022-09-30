@@ -23,11 +23,5 @@
     {% endif %}
 </form>
 
-<form action="{% url 'delete_likes' post.pk %}" method="post">
-    {% csrf_token %}
-    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm">Delete all likes</button>
-
-</form>
-
 
 {% endblock %}
