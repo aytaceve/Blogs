@@ -10,7 +10,7 @@ It is a blog app.
 # What I Learned
 
 * I've used Django framework to build Blog app.
-* For Periodic task used Celery.
+* For Periodic task used Celery & Redis.
 * Created like and dislike functionality.
 * Used Authentication to create Register, Login and Logout views
 * Jinja & integration of frontend and backend.
