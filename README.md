@@ -5,7 +5,7 @@ It is a blog app.
 
 * You can create, delete, update, like, read blogs.
 * You can delete all likes with one button.
-* There is a periodic task which delete every likes from every blogs every week. 
+* There is a periodic task which delete every likes from every blogs.
 
 # What I Learned
 
