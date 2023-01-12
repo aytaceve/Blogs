@@ -1,5 +1,5 @@
 # Blogs
-It is an blog app.
+It is a blog app.
 
 # To Do List
 
