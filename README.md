@@ -13,4 +13,4 @@ It is an blog app.
 * For Periodic task used Celery.
 * Created like and dislike functionality.
 * Used Authentication to create Register, Login and Logout views
-* Jinja 
+* Jinja & integration of frontend and backend.
